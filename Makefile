@@ -1,6 +1,7 @@
 PROJ = snake
 PCF = hx8k.pcf
 SRC = top.v
+SRC += spi_master.v max7219.v
 all: build/$(PROJ).bin
 
 build/$(PROJ).json: $(SRC)
