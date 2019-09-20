@@ -3,7 +3,5 @@ module top (
     output mosi, sclk, cs,
     output led0
 );
-    reg [23:0] cnt = 0;
-    always @(posedge clk) cnt <= cnt + 1;
-    assign led0 = cnt[23];
+    max7219 disp (.clk(clk), .mosi(mosi), .sclk(sclk), .cs(cs));
 endmodule
