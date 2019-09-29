@@ -3,6 +3,7 @@ PCF = hx8k.pcf
 SRC = top.v
 SRC += spi_master.v max7219.v
 SRC += frame.v
+SRC += debounce.v
 all: build/$(PROJ).bin
 
 build/$(PROJ).json: $(SRC)

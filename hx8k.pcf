@@ -3,3 +3,7 @@ set_io led0 B5
 set_io mosi A1
 set_io sclk A2
 set_io cs A5
+set_io btn_up B3
+set_io btn_down B4
+set_io btn_left C3
+set_io btn_right C4
