@@ -10,6 +10,9 @@ module snake (
 
     reg [2:0] hx = 3'd3, hy = 3'd3;
     reg [1:0] dir = 2'd3;  // 0 up, 1 down, 2 left, 3 right
+    reg [5:0] body [0:15];
+    reg [3:0] len = 4'd1;
+    integer i;
 
     always @(posedge clk) begin
         if (up) dir <= 0;
@@ -23,11 +26,15 @@ module snake (
                 2'd2: hx <= hx - 1;
                 2'd3: hx <= hx + 1;
             endcase
+            for (i = 15; i > 0; i = i - 1) body[i] <= body[i - 1];
+            body[0] <= {hy, hx};
         end
     end
 
     always @* begin
         frame = 64'd0;
         frame[{hy, hx}] = 1'b1;
+        for (i = 0; i < 16; i = i + 1)
+            if (i < len) frame[body[i]] = 1'b1;
     end
 endmodule
