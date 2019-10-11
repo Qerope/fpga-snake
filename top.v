@@ -9,10 +9,13 @@ module top (
     max7219 disp (.clk(clk), .frame(game_frame), .mosi(mosi), .sclk(sclk), .cs(cs));
     assign led0 = 1'b0;
     snake game (.clk(clk), .up(up), .down(down), .left(left), .right(right),
+                .rnd(rnd),
                 .frame(game_frame), .game_over(game_over));
     wire up, down, left, right;
     debounce d0 (.clk(clk), .in(btn_up), .out(up));
     debounce d1 (.clk(clk), .in(btn_down), .out(down));
     debounce d2 (.clk(clk), .in(btn_left), .out(left));
     debounce d3 (.clk(clk), .in(btn_right), .out(right));
+    wire [5:0] rnd;
+    lfsr r (.clk(clk), .out(rnd));
 endmodule

@@ -1,6 +1,7 @@
 module snake (
     input clk,
     input up, down, left, right,
+    input [5:0] rnd,
     output reg [63:0] frame,
     output reg game_over
 );
@@ -13,6 +14,7 @@ module snake (
     reg [5:0] body [0:15];
     reg [3:0] len = 4'd1;
     integer i;
+    reg [5:0] food = 6'd36;
 
     always @(posedge clk) begin
         if (up) dir <= 0;
@@ -36,5 +38,6 @@ module snake (
         frame[{hy, hx}] = 1'b1;
         for (i = 0; i < 16; i = i + 1)
             if (i < len) frame[body[i]] = 1'b1;
+        frame[food] = 1'b1;
     end
 endmodule
