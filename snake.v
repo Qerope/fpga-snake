@@ -15,6 +15,7 @@ module snake (
     reg [3:0] len = 4'd1;
     integer i;
     reg [5:0] food = 6'd36;
+    reg grow = 0;
 
     always @(posedge clk) begin
         if (up) dir <= 0;
@@ -30,6 +31,10 @@ module snake (
             endcase
             for (i = 15; i > 0; i = i - 1) body[i] <= body[i - 1];
             body[0] <= {hy, hx};
+            if ({hy, hx} == food) begin
+                if (len < 15) len <= len + 1;
+                food <= rnd;
+            end
         end
     end
 
