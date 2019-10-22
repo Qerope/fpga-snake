@@ -34,6 +34,8 @@ module snake (
             if ({hy, hx} == food) begin
                 if (len < 15) len <= len + 1;
                 food <= rnd;
+                // don't drop food on the head; body check is skipped, rare enough on 8x8
+                if (rnd == {hy, hx}) food <= rnd + 6'd1;
             end
         end
     end
