@@ -18,6 +18,12 @@ module snake (
     reg grow = 0;
 
     always @(posedge clk) begin
+        if (game_over) begin
+            if (up | down | left | right) begin
+                hx <= 3; hy <= 3; dir <= 3; game_over <= 0;
+                len <= 1;
+            end
+        end else begin
         if (up) dir <= 0;
         else if (down) dir <= 1;
         else if (left) dir <= 2;
@@ -37,6 +43,9 @@ module snake (
                 // don't drop food on the head; body check is skipped, rare enough on 8x8
                 if (rnd == {hy, hx}) food <= rnd + 6'd1;
             end
+            for (i = 0; i < 16; i = i + 1)
+                if (i < len && body[i] == {hy, hx}) game_over <= 1;
+        end
         end
     end
 
