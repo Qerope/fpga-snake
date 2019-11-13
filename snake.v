@@ -28,6 +28,10 @@ module snake (
         else if (down) dir <= 1;
         else if (left) dir <= 2;
         else if (right) dir <= 3;
+        if (up && dir != 1) dir <= 0;
+        else if (down && dir != 0) dir <= 1;
+        else if (left && dir != 3) dir <= 2;
+        else if (right && dir != 2) dir <= 3;
         if (tick) begin
             case (dir)
                 2'd0: hy <= hy - 1;
