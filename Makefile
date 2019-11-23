@@ -19,5 +19,8 @@ build/$(PROJ).asc: build/$(PROJ).json $(PCF)
 build/$(PROJ).bin: build/$(PROJ).asc
 	icepack $< $@
 
+prog: build/$(PROJ).bin
+	iceprog $<
+
 clean:
 	rm -rf build
